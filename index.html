@@ -15,18 +15,18 @@
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <style>
-        *{
-            margin: 0;
-            padding: 0;
-        }
-        .header{
-            width: 100%;
-            height: 10vh;
-            background-color:burlywood;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
+      * {
+        margin: 0;
+        padding: 0;
+      }
+      .header {
+        width: 100%;
+        height: 10vh;
+        background-color: burlywood;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
       .container {
         width: 100%;
         display: flex;
@@ -74,10 +74,13 @@
         width: 100%;
         display: grid;
         grid-template-columns: repeat(3, 1fr);
+        gap: 50px;
+        margin: auto;
       }
       .card {
         width: 100%;
-        background-color:burlywood;
+        background-color: burlywood;
+
         display: flex;
         justify-content: center;
         align-items: center;
@@ -89,20 +92,17 @@
         border: 1px solid black;
         box-shadow: 0px 0px 10px 0px black;
         color: rgb(0, 0, 0);
-       
       }
-
-
 
       /* responsive */
       @media only screen and (max-width: 412px) {
-        .header{
-            width: 100%;
-            height: 10vh;
-            background-color:burlywood;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+        .header {
+          width: 100%;
+          height: 10vh;
+          background-color: burlywood;
+          display: flex;
+          justify-content: center;
+          align-items: center;
         }
         .container {
           width: 100%;
@@ -110,6 +110,8 @@
           justify-content: center;
           align-items: center;
           margin: auto;
+          flex-direction: column;
+          gap: 20px;
         }
         form {
           padding: 10px 20px;
@@ -152,9 +154,8 @@
         }
 
         .card {
-
           width: 80%;
-          background-color:burlywood;
+          background-color: burlywood;
           display: flex;
           justify-content: center;
           align-items: center;
@@ -164,7 +165,7 @@
           border: 1px solid black;
           box-shadow: 0px 0px 10px 0px black;
           color: rgb(0, 0, 0);
-          font-size: small;
+          /* font-size: small; */
           text-align: center;
           gap: 20px;
         }
@@ -178,35 +179,36 @@
 <script type="text/babel">
   //feedback List
 
-  function Header(){
-    return(
-        <div className="header">
-          <ThemeToggle />    
-        </div>
-    )
+  function Header() {
+    return (
+      <div className="header">
+        <ThemeToggle />
+      </div>
+    );
   }
 
-  function ThemeToggle(){
-    let {useEffect}=React;
+  function ThemeToggle() {
+    let { useEffect } = React;
 
-    const [theme,setTheme]=React.useState("Light");
+    const [theme, setTheme] = React.useState("Light");
 
-    const handleToggle=()=>{
-        if(theme==="Light"){
-            setTheme("Dark");
-            document.body.style.backgroundColor="black";
-            document.body.style.color="white";
-        }else if(theme=="Dark"){
-            setTheme("Light");
-            document.body.style.backgroundColor="white";
-            document.body.style.color="black";
+    const handleToggle = () => {
+      if (theme === "Light") {
+        setTheme("Dark");
+        document.body.style.backgroundColor = "black";
+        document.body.style.color = "white";
+      } else if (theme == "Dark") {
+        setTheme("Light");
+        document.body.style.backgroundColor = "white";
+        document.body.style.color = "black";
+      }
+    };
 
-        }
-    }
-     
-      return(
-        <button type="button" onClick={handleToggle}>{theme==="Light"?"Dark":"Light"}</button>
-      )
+    return (
+      <button type="button" onClick={handleToggle}>
+        {theme === "Light" ? "Dark" : "Light"}
+      </button>
+    );
   }
 
   function FeedbackList() {
@@ -251,7 +253,7 @@
         <div className="conatiner1">
           {feedbackData.map((item, index) => (
             <div className="card">
-              <h1>Username: {item[1].username}</h1>
+              <h2>Username: {item[1].username}</h2>
               <p>Email: {item[1].email}</p>
               <p>Comment: {item[1].comment}</p>
               <button onClick={() => handleDelete(item[0])}>Delete</button>
@@ -303,6 +305,7 @@
             value={formdata.username}
             onChange={handleChange}
             placeholder="Enter Username"
+            required
           />
         </label>
         <label>
@@ -314,6 +317,7 @@
             value={formdata.email}
             onChange={handleChange}
             placeholder="Enter Email"
+            required
           />
         </label>
         <label>
@@ -326,6 +330,7 @@
             placeholder="Enter FeedBack"
             cols="16"
             rows="3"
+            required
           ></textarea>
         </label>
         <button type="submit">Add</button>
@@ -336,7 +341,7 @@
   function App() {
     return (
       <div className="container">
-        <Header/>
+        <Header />
         <FeedbackForm />
         <FeedbackList />
       </div>
